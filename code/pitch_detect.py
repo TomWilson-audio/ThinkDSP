@@ -1,5 +1,6 @@
 import thinkdsp as dsp
 import thinkplot as plot
+
 #import matplotlib
 from matplotlib import pyplot
 
@@ -19,20 +20,27 @@ print('Plotting Waveform (time domain)...')
 #sin_wave.plot()        #uncomment to plot sin
 #wave.plot()            #uncomment to plot wave
 segment.plot()
+dsp.decorate(xlabel= 'Time (S)')
 pyplot.show()
 
-#
-#   Draw Spectrum from Wave (time domain to frequency domain)
-#
+
 print('Plotting Spectrum (frequency domain)...')
 spectrum = wave.make_spectrum()
 spectrum.plot()
+dsp.decorate(xlabel= 'Frequency (Hz)')
 plot.show()
 
+#Print Wave properties
+print("""
+Waveform Properties:
+""")
+print(" Total Number of Samples =", len(wave.ys)) 
+print(" Sample Rate =", wave.framerate, "Hz")
+print(" Sample Period in mS =", (1/wave.framerate) * 1000)
 t = 0
 index_at_t = wave.find_index(t)             #Get index for a given time
 sample_at_t = wave.ys[index_at_t]           #Access individual samples with .ys[i] 
-print("Sample at Index[" + str(index_at_t) + "] = "+ str(sample_at_t))
+print(" Sample at Index[" + str(index_at_t) + "] = "+ str(sample_at_t))
 
 
 
